@@ -6,16 +6,17 @@
 #    By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 09:45:49 by lnicosia          #+#    #+#              #
-#    Updated: 2021/03/26 11:48:35 by lnicosia         ###   ########.fr        #
+#    Updated: 2021/05/11 10:46:02 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = libftasm.a
 
 MAKEFILE = Makefile
 
 LIB_DIR = lib
 SRC_DIR = src
+SRC_SIZE = $(shell ls src | grep .s | wc -l)
 OBJ_DIR = obj
 BIN_DIR = .
 INCLUDES_DIR = includes
@@ -36,7 +37,10 @@ LDFLAGS =
 
 LIB_RAW = 
 
-SRC_RAW =	test.s
+SRC_RAW =	ft_strlen.s ft_puts.s ft_bzero.s ft_strcat.s ft_isalnum.s \
+			ft_isalpha.s ft_isascii.s ft_isdigit.s ft_isprint.s \
+			ft_tolower.s ft_toupper.s ft_memset.s ft_memcpy.s \
+			ft_strdup.s 
 
 HEADERS =	
 
@@ -53,13 +57,13 @@ RESOURCES =
 
 OPTI_FLAGS = -O3
 
-CFLAGS =	-Wall -Wextra -Werror -Wpadded -Wconversion -I $(INCLUDES_DIR) \
+CFLAGS = -Wall -Wextra -Werror -Wpadded -Wconversion -I $(INCLUDES_DIR) \
 	  	-I $(LIBFT_DIR)/includes -I $(BMP_PARSER_DIR)/includes \
 		-I $(LIBMFT_DIR)/includes -I $(GLAD_DIR)/include \
 		$(OPTI_FLAGS) \
 		#-fsanitize=address -g3 \
 
-ASMFLAGS = -f elf64
+ASMFLAGS = -g -f elf64 -F dwarf
 		
 	
 #
@@ -108,13 +112,16 @@ $(LIBMFT):
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+I = 1
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s $(INCLUDES)
-	@printf $(YELLOW)"Compiling $<\n"$(RESET)
+	@printf $(YELLOW)"[$(I)/$(SRC_SIZE)] Compiling $<\n"$(RESET)
+	$(eval I=$(shell echo $$(($(I) + 1))))
 	@nasm $< -o $@ $(ASMFLAGS) 
 
 $(NAME): $(OBJ_DIR) $(OBJ) 
-	@printf $(CYAN)"[INFO] Linking ${BIN_DIR}/${NAME}\n"$(RESET)
-	@ld -o $(NAME) $(OBJ) $(LDFLAGS) $(LDLIBS)
+	@printf $(CYAN)"[INFO] Linking ${BIN_DIR}/${NAME}\n"$(YELLOW)
+	ar rc -o $(NAME) $(OBJ) 
+	ranlib $(NAME)
 	@printf ${GREEN}"[INFO] Compiled $(BIN_DIR)/$(NAME) with success!\n"
 	@printf ${RESET}
 
