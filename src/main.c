@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2021/05/11 11:25:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2021/05/11 12:12:18 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 int			ft_puts(const char *s);
 size_t		ft_strlen(const char *s);
@@ -120,12 +122,18 @@ int		main(int ac, char **av)
 	//printf("|\n");
 	*/
 
-	printf("%c tolower =	%c (%d)\n", av[1][0], tolower(av[1][0]), tolower(av[1][0]));
+	/*printf("%c tolower =	%c (%d)\n", av[1][0], tolower(av[1][0]), tolower(av[1][0]));
 	printf("%c ft_tolower =	%c (%d)\n", av[1][0], ft_tolower(av[1][0]), ft_tolower(av[1][0]));
 	printf("%c toupper =	%c (%d)\n", av[1][0], toupper(av[1][0]), toupper(av[1][0]));
 	printf("%c ft_toupper =	%c (%d)\n", av[1][0], ft_toupper(av[1][0]), ft_toupper(av[1][0]));
+*/
 
+	int fd;
 
+	fd = open(av[1], O_RDONLY);
+
+	ft_cat(0);
+	close(fd);
 
 	return (0);
 }
