@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2021/05/11 12:12:18 by lnicosia         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:20:06 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,21 @@ int		main(int ac, char **av)
 	else
 		printf("Not alnum\n");*/
 
-	/*printf("addrr = %p\n", av[1]);
-	printf("strdup =	|%s|\n", strdup(av[1]));
+	printf("addrr = %p\n", av[1]);
+	char *avcpy = strdup(av[1]);
+	printf("strdup =	|%s|\n", avcpy);
+	free(avcpy);
 	char *str = ft_strdup(av[1]);
+	printf("Yo\n");
 	printf("addrr = %p\n", str);
 	printf("ft_strdup =	|%s|\n", str);
+	free(str);
 	//for (size_t i = 0; i < strlen(av[1]) + 2; i++)
 	//{
 	//	printf("%d(%c) ", str[i], str[i]);
 	//}
 	//printf("|\n");
-	*/
+	
 
 	/*printf("%c tolower =	%c (%d)\n", av[1][0], tolower(av[1][0]), tolower(av[1][0]));
 	printf("%c ft_tolower =	%c (%d)\n", av[1][0], ft_tolower(av[1][0]), ft_tolower(av[1][0]));
@@ -128,12 +132,12 @@ int		main(int ac, char **av)
 	printf("%c ft_toupper =	%c (%d)\n", av[1][0], ft_toupper(av[1][0]), ft_toupper(av[1][0]));
 */
 
-	int fd;
+	/*int fd;
 
 	fd = open(av[1], O_RDONLY);
 
 	ft_cat(0);
-	close(fd);
+	close(fd);*/
 
 	return (0);
 }

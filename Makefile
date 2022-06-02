@@ -6,11 +6,11 @@
 #    By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 09:45:49 by lnicosia          #+#    #+#              #
-#    Updated: 2021/05/11 11:52:33 by lnicosia         ###   ########.fr        #
+#    Updated: 2021/07/02 16:31:46 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftasm.a
+NAME = libasm.a
 
 MAKEFILE = Makefile
 
@@ -116,10 +116,10 @@ I = 1
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s $(INCLUDES)
 	@printf $(YELLOW)"[$(I)/$(SRC_SIZE)] Compiling $<\n"$(RESET)
 	$(eval I=$(shell echo $$(($(I) + 1))))
-	@nasm $< -o $@ $(ASMFLAGS) 
+	nasm $< -o $@ $(ASMFLAGS) 
 
 $(NAME): $(OBJ_DIR) $(OBJ) 
-	@printf $(CYAN)"[INFO] Linking ${BIN_DIR}/${NAME}\n"$(YELLOW)
+	@printf $(CYAN)"[INFO] Linking ${BIN_DIR}/${NAME}\n"$(RESET)
 	ar rc -o $(NAME) $(OBJ) 
 	ranlib $(NAME)
 	@printf ${GREEN}"[INFO] Compiled $(BIN_DIR)/$(NAME) with success!\n"

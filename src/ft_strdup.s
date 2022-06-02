@@ -8,12 +8,13 @@ ft_strdup:
 
 	; char		*ft_strdup(const char *s);
 
-	mov r9, rdi		; save s
+	push rdi		; save s
 	call ft_strlen	; get its len
 	mov r12, rax	; save it in r10
 	inc r12			; + 1 for the '\0'
 	mov rdi, r12	; put it in rdi (arg for malloc)
 	call malloc		; malloc new str (res is in rax)
+	pop r9
 	mov r14, rax
 	xor rcx, rcx
 	cmp rcx, r12
