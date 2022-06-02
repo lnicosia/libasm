@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2022/06/02 18:20:06 by lnicosia         ###   ########.fr       */
+/*   Updated: 2022/06/02 20:07:26 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <ctype.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
 
 int			ft_puts(const char *s);
 size_t		ft_strlen(const char *s);
@@ -34,11 +35,18 @@ char		*ft_strdup(const char *s);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
 void		ft_cat(int fd);
+ssize_t		ft_write(int fd, const void* buf, size_t count);
+void		ft_call_convention(int a, int b, int c, int d, int e, int f, int g, int h);
 
 int		main(int ac, char **av)
 {
 	if (ac < 1)
 		return (0);
+
+	//	CALLING CONVENTION
+
+	//ft_call_convention(1, 2, 3, 4, 5, 6, 7, 8);
+
 	/*int		ret = 0;
 	printf("av[1] = %p\n", av[1]);
 	printf("---------------\nstrlen = %lu\n", strlen(av[1]));
@@ -110,7 +118,7 @@ int		main(int ac, char **av)
 	else
 		printf("Not alnum\n");*/
 
-	printf("addrr = %p\n", av[1]);
+	/*printf("addrr = %p\n", av[1]);
 	char *avcpy = strdup(av[1]);
 	printf("strdup =	|%s|\n", avcpy);
 	free(avcpy);
@@ -118,7 +126,7 @@ int		main(int ac, char **av)
 	printf("Yo\n");
 	printf("addrr = %p\n", str);
 	printf("ft_strdup =	|%s|\n", str);
-	free(str);
+	free(str);*/
 	//for (size_t i = 0; i < strlen(av[1]) + 2; i++)
 	//{
 	//	printf("%d(%c) ", str[i], str[i]);
@@ -138,6 +146,41 @@ int		main(int ac, char **av)
 
 	ft_cat(0);
 	close(fd);*/
+
+	//	WRITE 
+
+	ssize_t ret_1 = write(4, av[1], strlen(av[1]));
+	if (ret_1 == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("'write(4, av[1], strlen(av[1])'");
+	}
+	ssize_t ret0 = ft_write(4, av[1], strlen(av[1]));
+	if (ret0 == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("'ft_write(4, av[1], strlen(av[1]))'");
+	}
+
+	ssize_t ret_2 = write(STDOUT_FILENO, 0, 4);
+	if (ret_2 == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("'write(STDOUT_FILENO, 0, strlen(av[1])'");
+	}
+	ssize_t ret_3 = ft_write(STDOUT_FILENO, 0, 4);
+	if (ret_3 == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("'ft_write(STDOUT_FILENO, 0, strlen(av[1]))'");
+	}
+
+	ssize_t ret1 = write(STDOUT_FILENO, av[1], strlen(av[1]));
+	ssize_t ret2 = write(STDOUT_FILENO, "\n", 1);
+	printf("ret1 = %ld ret2 = %ld\n", ret1, ret2);
+	ssize_t ret3 = ft_write(STDOUT_FILENO, av[1], strlen(av[1]));
+	ssize_t ret4 = ft_write(STDOUT_FILENO, "\n", 1);
+	printf("ret3 = %ld ret4 = %ld\n", ret3, ret4);
 
 	return (0);
 }
