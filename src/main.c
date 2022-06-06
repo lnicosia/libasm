@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2022/06/02 20:07:26 by lnicosia         ###   ########.fr       */
+/*   Updated: 2022/06/04 09:23:39 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		main(int ac, char **av)
 	printf("Ret value = %d\n", ret);*/
 
 
-/*#define SIZE 10
+#define SIZE 10
 	size_t	i = 0;
 	char	test1[SIZE];
 	char	test2[SIZE];
@@ -101,7 +101,7 @@ int		main(int ac, char **av)
 		printf("%-4d", test2[i]);
 		i++;
 	}
-	printf("|\n");*/
+	printf("|\n");
 
 	
 	//ft_strcat(av[1], av[2]);

@@ -7,11 +7,11 @@ ft_memcpy:
 
 	xor rcx, rcx
 
-init_loop:
+cpy_loop:
 	mov r8, [rsi + rcx - 1]
 	mov [rdi + rcx - 1], r8b	; put byte of rsi in [addr pointed by rdi (first arg) + count - 1]
 	inc rcx			; count--
 	cmp rcx, rdx	; start again if count <= n
-	jle init_loop
+	jle cpy_loop
 	mov rax, rdi
 	ret
