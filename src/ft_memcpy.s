@@ -10,7 +10,7 @@ ft_memcpy:
 cpy_loop:
 	mov r8, [rsi + rcx - 1]
 	mov [rdi + rcx - 1], r8b	; put byte of rsi in [addr pointed by rdi (first arg) + count - 1]
-	inc rcx			; count--
+	inc rcx			; count++;
 	cmp rcx, rdx	; start again if count <= n
 	jle cpy_loop
 	mov rax, rdi

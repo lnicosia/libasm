@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2022/06/04 09:23:39 by lnicosia         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:17:55 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int			ft_toupper(int c);
 void		ft_cat(int fd);
 ssize_t		ft_write(int fd, const void* buf, size_t count);
 void		ft_call_convention(int a, int b, int c, int d, int e, int f, int g, int h);
+char		*ft_strcpy(char *dest, const char *src);
+
 
 int		main(int ac, char **av)
 {
@@ -149,7 +151,7 @@ int		main(int ac, char **av)
 
 	//	WRITE 
 
-	ssize_t ret_1 = write(4, av[1], strlen(av[1]));
+	/*ssize_t ret_1 = write(4, av[1], strlen(av[1]));
 	if (ret_1 == -1)
 	{
 		printf("errno = %d\n", errno);
@@ -180,7 +182,50 @@ int		main(int ac, char **av)
 	printf("ret1 = %ld ret2 = %ld\n", ret1, ret2);
 	ssize_t ret3 = ft_write(STDOUT_FILENO, av[1], strlen(av[1]));
 	ssize_t ret4 = ft_write(STDOUT_FILENO, "\n", 1);
-	printf("ret3 = %ld ret4 = %ld\n", ret3, ret4);
+	printf("ret3 = %ld ret4 = %ld\n", ret3, ret4);*/
+
+	//	STRCPY
+
+	printf("--Test with src = av[1]--\n");
+	char* str1 = (char*)malloc(sizeof(char) * strlen(av[1]) + 1);
+	char* str2 = (char*)malloc(sizeof(char) * ft_strlen(av[1]) + 1);
+	strcpy(str1, av[1]);
+	printf("strcpy of av[1] = '%s'\n", str1);
+	ft_strcpy(str2, av[1]);
+	printf("ft_strcpy of av[1] = '%s'\n", str2);
+	free(str1);
+	free(str2);
+
+	//	Uncomment to test but strcpy crashes
+	/*printf("--Test with src = null--\n");
+	str1 = (char*)malloc(sizeof(char) * strlen(av[1]) + 1);
+	str2 = (char*)malloc(sizeof(char) * ft_strlen(av[1]) + 1);
+	strcpy(str1, NULL);
+	printf("strcpy of null = '%s'\n", str1);
+	ft_strcpy(str2, NULL);
+	printf("ft_strcpy of  = '%s'\n", str2);
+	free(str1);
+	free(str2);*/
+
+	printf("--Test with src = \"\"--\n");
+	str1 = (char*)malloc(sizeof(char) * 1);
+	str2 = (char*)malloc(sizeof(char) * 1);
+	strcpy(str1, "");
+	printf("strcpy of null = '%s'\n", str1);
+	ft_strcpy(str2, "");
+	printf("ft_strcpy of  = '%s'\n", str2);
+	free(str1);
+	free(str2);
+
+	printf("--Test with dest too big--\n");
+	str1 = (char*)malloc(sizeof(char) * strlen(av[1]) * 2);
+	str2 = (char*)malloc(sizeof(char) * ft_strlen(av[1]) * 2);
+	strcpy(str1, av[1]);
+	printf("strcpy of av[1] = '%s'\n", str1);
+	ft_strcpy(str2, av[1]);
+	printf("ft_strcpy of av[1] = '%s'\n", str2);
+	free(str1);
+	free(str2);
 
 	return (0);
 }
