@@ -7,7 +7,7 @@ ft_write:
 
 	; ssize_t write(int fd, const void* buf, size_t count)
 
-	mov rax, 1;	1 = syscall for write()
+	mov rax, 1		;	1 = syscall for write()
 	syscall
 	cmp rax, 0
 	jl error

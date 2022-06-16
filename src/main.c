@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2022/06/16 18:14:35 by lnicosia         ###   ########.fr       */
+/*   Updated: 2022/06/16 18:32:47 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,32 @@ int		main(int ac, char **av)
 		return 1;
 		
 	ft_strcat(av[1], av[2]);
-	char	*str1 = strdup(av[1]);
-	char	*str2 = strdup(av[1]);
+	char	*str1 = (char*)malloc((strlen(av[1]) + strlen(av[2]) + 1) * sizeof(char));
+	char	*str2 = (char*)malloc((ft_strlen(av[1]) + ft_strlen(av[2]) + 1) * sizeof(char));
+	strcpy(str1, av[1]);
+	ft_strcpy(str2, av[1]);
 	printf("dst = %p\n", str2);
 	printf("src = %p\n", av[2]);
+	printf("str1 = %s\n", str1);
 	printf("str2 = %s\n", str2);
 	printf("strcat:		|%s|\n", strcat(str1, av[2]));
-	printf("ft_strcat:	|%s|\n", ft_strcat(str2, av[2]));*/
+	printf("ft_strcat:	|%s|\n", ft_strcat(str2, av[2]));
+	free(str1);
+	free(str2);*/
 	
-	/*if (ft_isalnum(atoi(av[1])))
+	//	ISALNUM
+	
+	/*if (ac < 2)
+		return 1;
+	if (ft_isalnum(atoi(av[1])))
 		printf("alnum\n");
 	else
 		printf("Not alnum\n");*/
 
-	/*printf("av[1] addrr = %p\n", av[1]);
+	//	STRDUP
+	/*if (ac < 2)
+		return 1;
+	printf("av[1] addrr = %p\n", av[1]);
 	printf("strlen = %lu\n", strlen(av[1]));
 	printf("ft_strlen = %lu\n", ft_strlen(av[1]));
 	char *avcpy = strdup(av[1]);
@@ -142,28 +154,23 @@ int		main(int ac, char **av)
 	free(avcpy);
 	char *str = ft_strdup(av[1]);
 	printf("addrr = %p\n", str);
-	//printf("ft_strdup =	|%s|\n", str);
-	for (size_t i = 0; i < strlen(av[1]); i++)
-		printf("%c", str[i]);
-	printf("\n");
-	for (size_t i = 0; i < strlen(av[1]); i++)
-		printf("%d ", str[i]);
 	printf("\n");
 	free(str);*/
-	//for (size_t i = 0; i < strlen(av[1]) + 2; i++)
-	//{
-	//	printf("%d(%c) ", str[i], str[i]);
-	//}
-	//printf("|\n");
 	
+	//	TOLOWER
 
-	/*printf("%c tolower =	%c (%d)\n", av[1][0], tolower(av[1][0]), tolower(av[1][0]));
+	/*if (ac < 2)
+		return 1;
+	printf("%c tolower =	%c (%d)\n", av[1][0], tolower(av[1][0]), tolower(av[1][0]));
 	printf("%c ft_tolower =	%c (%d)\n", av[1][0], ft_tolower(av[1][0]), ft_tolower(av[1][0]));
 	printf("%c toupper =	%c (%d)\n", av[1][0], toupper(av[1][0]), toupper(av[1][0]));
 	printf("%c ft_toupper =	%c (%d)\n", av[1][0], ft_toupper(av[1][0]), ft_toupper(av[1][0]));
-*/
+	*/
 
-	/*int fd;
+	//	FT_CAT
+	/*if (ac < 2)
+		return 1;
+	int fd;
 
 	fd = open(av[1], O_RDONLY);
 
@@ -172,7 +179,9 @@ int		main(int ac, char **av)
 
 	//	WRITE 
 
-	/*ssize_t ret_1 = write(4, av[1], strlen(av[1]));
+	/*if (ac < 2)
+		return 1;
+	ssize_t ret_1 = write(4, av[1], strlen(av[1]));
 	if (ret_1 == -1)
 	{
 		printf("errno = %d\n", errno);
@@ -207,7 +216,9 @@ int		main(int ac, char **av)
 
 	//	STRCPY
 
-	/*printf("--Test with src = av[1]--\n");
+	/*if (ac < 2)
+		return 1;
+	printf("--Test with src = av[1]--\n");
 	char* str1 = (char*)malloc(sizeof(char) * strlen(av[1]) + 1);
 	char* str2 = (char*)malloc(sizeof(char) * ft_strlen(av[1]) + 1);
 	strcpy(str1, av[1]);
@@ -258,7 +269,7 @@ int		main(int ac, char **av)
 
 	//	READ
 	
-	printf("----VALID INPUT TEST----\n\n");
+	/*printf("----VALID INPUT TEST----\n\n");
 	int ret, fd;
 	fd = open("test_file.txt", O_RDONLY);
 	if (fd == -1)
@@ -341,7 +352,7 @@ int		main(int ac, char **av)
 		printf("errno = %d\n", errno);
 		perror("ft_read");
 	}
-	close(fd);
+	close(fd);*/
 
 	return (0);
 }
