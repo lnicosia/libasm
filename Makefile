@@ -6,7 +6,7 @@
 #    By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 09:45:49 by lnicosia          #+#    #+#              #
-#    Updated: 2022/06/09 17:58:23 by lnicosia         ###   ########.fr        #
+#    Updated: 2022/06/16 11:14:13 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_RAW =	ft_strlen.s ft_puts.s ft_bzero.s ft_strcat.s ft_isalnum.s \
 			ft_isalpha.s ft_isascii.s ft_isdigit.s ft_isprint.s \
 			ft_tolower.s ft_toupper.s ft_memset.s ft_memcpy.s \
 			ft_strdup.s ft_cat.s ft_write.s ft_call_convention.s \
-			ft_strcpy.s \
+			ft_strcpy.s ft_strcmp.s \
 
 HEADERS =	
 
@@ -61,8 +61,9 @@ OPTI_FLAGS = -O3
 CFLAGS = -Wall -Wextra -Werror -Wpadded -Wconversion -I $(INCLUDES_DIR) \
 	  	-I $(LIBFT_DIR)/includes -I $(BMP_PARSER_DIR)/includes \
 		-I $(LIBMFT_DIR)/includes -I $(GLAD_DIR)/include \
-		$(OPTI_FLAGS) \
-		#-fsanitize=address -g3 \
+		-fsanitize=address -g3 \
+		#$(OPTI_FLAGS) \
+		
 
 ASMFLAGS = -g -f elf64 -F dwarf
 		

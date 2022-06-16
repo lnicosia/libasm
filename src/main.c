@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2022/06/09 18:17:55 by lnicosia         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:31:19 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ void		ft_cat(int fd);
 ssize_t		ft_write(int fd, const void* buf, size_t count);
 void		ft_call_convention(int a, int b, int c, int d, int e, int f, int g, int h);
 char		*ft_strcpy(char *dest, const char *src);
+int			ft_strcmp(const char* s1, const char* s2);
 
 
 int		main(int ac, char **av)
 {
-	if (ac < 1)
+	if (ac < 2)
 		return (0);
 
 	//	CALLING CONVENTION
@@ -62,7 +63,7 @@ int		main(int ac, char **av)
 
 
 #define SIZE 10
-	size_t	i = 0;
+	/*size_t	i = 0;
 	char	test1[SIZE];
 	char	test2[SIZE];
 	char	test12[SIZE];
@@ -103,7 +104,7 @@ int		main(int ac, char **av)
 		printf("%-4d", test2[i]);
 		i++;
 	}
-	printf("|\n");
+	printf("|\n");*/
 
 	
 	//ft_strcat(av[1], av[2]);
@@ -120,14 +121,22 @@ int		main(int ac, char **av)
 	else
 		printf("Not alnum\n");*/
 
-	/*printf("addrr = %p\n", av[1]);
+	/*printf("av[1] addrr = %p\n", av[1]);
+	printf("strlen = %lu\n", strlen(av[1]));
+	printf("ft_strlen = %lu\n", ft_strlen(av[1]));
 	char *avcpy = strdup(av[1]);
+	printf("addrr = %p\n", avcpy);
 	printf("strdup =	|%s|\n", avcpy);
 	free(avcpy);
 	char *str = ft_strdup(av[1]);
-	printf("Yo\n");
 	printf("addrr = %p\n", str);
-	printf("ft_strdup =	|%s|\n", str);
+	//printf("ft_strdup =	|%s|\n", str);
+	for (size_t i = 0; i < strlen(av[1]); i++)
+		printf("%c", str[i]);
+	printf("\n");
+	for (size_t i = 0; i < strlen(av[1]); i++)
+		printf("%d ", str[i]);
+	printf("\n");
 	free(str);*/
 	//for (size_t i = 0; i < strlen(av[1]) + 2; i++)
 	//{
@@ -207,7 +216,7 @@ int		main(int ac, char **av)
 	free(str1);
 	free(str2);*/
 
-	printf("--Test with src = \"\"--\n");
+	/*printf("--Test with src = \"\"--\n");
 	str1 = (char*)malloc(sizeof(char) * 1);
 	str2 = (char*)malloc(sizeof(char) * 1);
 	strcpy(str1, "");
@@ -225,7 +234,7 @@ int		main(int ac, char **av)
 	ft_strcpy(str2, av[1]);
 	printf("ft_strcpy of av[1] = '%s'\n", str2);
 	free(str1);
-	free(str2);
+	free(str2);*/
 
 	return (0);
 }
