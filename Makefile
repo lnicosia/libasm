@@ -6,7 +6,7 @@
 #    By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/22 09:45:49 by lnicosia          #+#    #+#              #
-#    Updated: 2022/06/16 11:14:13 by lnicosia         ###   ########.fr        #
+#    Updated: 2022/06/16 17:42:49 by lnicosia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_RAW =	ft_strlen.s ft_puts.s ft_bzero.s ft_strcat.s ft_isalnum.s \
 			ft_isalpha.s ft_isascii.s ft_isdigit.s ft_isprint.s \
 			ft_tolower.s ft_toupper.s ft_memset.s ft_memcpy.s \
 			ft_strdup.s ft_cat.s ft_write.s ft_call_convention.s \
-			ft_strcpy.s ft_strcmp.s \
+			ft_strcpy.s ft_strcmp.s ft_read.s \
 
 HEADERS =	
 

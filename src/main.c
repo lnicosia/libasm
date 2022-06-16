@@ -6,7 +6,7 @@
 /*   By: lnicosia <lnicosia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 11:13:47 by lnicosia          #+#    #+#             */
-/*   Updated: 2022/06/16 15:31:19 by lnicosia         ###   ########.fr       */
+/*   Updated: 2022/06/16 18:14:35 by lnicosia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,21 @@ ssize_t		ft_write(int fd, const void* buf, size_t count);
 void		ft_call_convention(int a, int b, int c, int d, int e, int f, int g, int h);
 char		*ft_strcpy(char *dest, const char *src);
 int			ft_strcmp(const char* s1, const char* s2);
+ssize_t		ft_read(int fd, void *buf, size_t count);
 
 
 int		main(int ac, char **av)
 {
-	if (ac < 2)
-		return (0);
 
 	//	CALLING CONVENTION
 
 	//ft_call_convention(1, 2, 3, 4, 5, 6, 7, 8);
 
-	/*int		ret = 0;
+	//	STRLEN
+
+	/*if (ac < 2)
+		return 1;
+	int		ret = 0;
 	printf("av[1] = %p\n", av[1]);
 	printf("---------------\nstrlen = %lu\n", strlen(av[1]));
 	printf("---------------\nft_strlen = %lu\n", ft_strlen(av[1]));
@@ -63,7 +66,12 @@ int		main(int ac, char **av)
 
 
 #define SIZE 10
-	/*size_t	i = 0;
+	//	MEMCPY
+
+	/*if (ac < 2)
+		return 1;
+		
+	size_t	i = 0;
 	char	test1[SIZE];
 	char	test2[SIZE];
 	char	test12[SIZE];
@@ -106,9 +114,13 @@ int		main(int ac, char **av)
 	}
 	printf("|\n");*/
 
+	// STRCAT
 	
-	//ft_strcat(av[1], av[2]);
-	/*char	*str1 = strdup(av[1]);
+	/*if (ac < 3)
+		return 1;
+		
+	ft_strcat(av[1], av[2]);
+	char	*str1 = strdup(av[1]);
 	char	*str2 = strdup(av[1]);
 	printf("dst = %p\n", str2);
 	printf("src = %p\n", av[2]);
@@ -195,7 +207,7 @@ int		main(int ac, char **av)
 
 	//	STRCPY
 
-	printf("--Test with src = av[1]--\n");
+	/*printf("--Test with src = av[1]--\n");
 	char* str1 = (char*)malloc(sizeof(char) * strlen(av[1]) + 1);
 	char* str2 = (char*)malloc(sizeof(char) * ft_strlen(av[1]) + 1);
 	strcpy(str1, av[1]);
@@ -203,7 +215,7 @@ int		main(int ac, char **av)
 	ft_strcpy(str2, av[1]);
 	printf("ft_strcpy of av[1] = '%s'\n", str2);
 	free(str1);
-	free(str2);
+	free(str2);*/
 
 	//	Uncomment to test but strcpy crashes
 	/*printf("--Test with src = null--\n");
@@ -235,6 +247,101 @@ int		main(int ac, char **av)
 	printf("ft_strcpy of av[1] = '%s'\n", str2);
 	free(str1);
 	free(str2);*/
+
+	//	STRCMP
+
+	/*if (ac < 3)
+		return 0;
+
+	printf("strcmp(av[1], av[2]) = %d\n", strcmp(av[1], av[2]));
+	printf("ft_strcmp(av[1], av[2]) = %d\n", ft_strcmp(av[1], av[2]));*/
+
+	//	READ
+	
+	printf("----VALID INPUT TEST----\n\n");
+	int ret, fd;
+	fd = open("test_file.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		perror("open error:");
+		return -1;
+	}
+#define BUFF_SIZE 512
+	printf("----read----\n");
+	char buf1[BUFF_SIZE + 1];
+	while ((ret = read(fd, buf1, BUFF_SIZE)))
+	{
+		buf1[ret] = 0;
+		printf("%s", buf1);
+	}
+	close(fd);
+	fd = open("test_file.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		perror("open error:");
+		return -1;
+	}
+	printf("---ft_read----\n");
+	char buf2[BUFF_SIZE + 1];
+	while ((ret = ft_read(fd, buf2, BUFF_SIZE)))
+	{
+		buf2[ret] = 0;
+		printf("%s", buf2);
+	}
+	close(fd);
+	printf("\n----CLOSED FD TEST----\n\n");
+	if (read(fd, buf1, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("read");
+	}
+	if (ft_read(fd, buf2, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("ft_read");
+	}
+
+	printf("\n----FD OPEN IN WRONLY TEST----\n\n");
+	fd = open("test_file.txt", O_WRONLY);
+	if (read(-1, buf1, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("read");
+	}
+	if (ft_read(-1, buf2, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("ft_read");
+	}
+	close(fd);
+
+	printf("\n----DIRECTORY FD TEST----\n\n");
+	fd = open("src", O_RDONLY | O_DIRECTORY);
+	if (read(-1, buf1, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("read");
+	}
+	if (ft_read(-1, buf2, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("ft_read");
+	}
+	close(fd);
+
+	printf("\n----INVALID BUFFER TEST----\n\n");
+	fd = open("test_file.txt", O_RDONLY);
+	if (read(fd, NULL, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("read");
+	}
+	if (ft_read(fd, NULL, BUFF_SIZE) == -1)
+	{
+		printf("errno = %d\n", errno);
+		perror("ft_read");
+	}
+	close(fd);
 
 	return (0);
 }

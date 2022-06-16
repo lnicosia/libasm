@@ -1,13 +1,12 @@
 extern __errno_location
 
 section .text
-	global ft_write
+	global ft_read
 
-ft_write:
+ft_read:
+	; ssize_t read(int fd, void *buf, size_t count);
 
-	; ssize_t write(int fd, const void* buf, size_t count)
-
-	mov rax, 1;	1 = syscall for write()
+	mov rax, 0		;	0 = syscall for read()
 	syscall
 	cmp rax, 0
 	jl error
